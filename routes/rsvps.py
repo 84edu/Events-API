@@ -19,6 +19,7 @@ def get_current_user():
         return None, False
 
 @rsvps_bp.route('/event/<int:event_id>', methods=['POST'])
+@jwt_required()
 def rsvp(event_id):
     """RSVP to an event with different access requirements"""
     event = Event.query.get_or_404(event_id)

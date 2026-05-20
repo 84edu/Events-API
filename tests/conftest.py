@@ -20,13 +20,13 @@ def auth_token(base_url):
     password = "testpassword123"
 
     # 1. Registering
-    requests.post(f"{base_url}/register", json={
+    requests.post(f"{base_url}/api/auth/register", json={
         "username": unique_user,
         "password": password
     })
 
     # 2. Login
-    login_res = requests.post(f"{base_url}/login", json={
+    login_res = requests.post(f"{base_url}/api/auth/login", json={
         "username": unique_user,
         "password": password
     })
