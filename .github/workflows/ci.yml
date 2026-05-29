@@ -36,3 +36,21 @@ jobs:
       - name: Check Health
         run: |
           curl --fail http://localhost:5000/api/events || exit 1
+
+      # 5. Set up Python on the Runner
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      # 6. Install dependencies on the runner
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pytest requests 
+
+      # 7. Run Tests
+      - name: Run Tests
+        run: |
+          pytest -v
