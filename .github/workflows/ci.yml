@@ -27,7 +27,8 @@ jobs:
       # We use `-d` for the background and map port 5000.
       - name: Start container
         run: |
-          docker run -d -p 5000:5000 --name active-events-api events-api:latest
+          # We map host port 5002 to container port 5000.
+          docker run -d -p 5002:5000 --name active-events-api events-api:latest
           # Important: Give the app time to boot up.
           sleep 10
 
