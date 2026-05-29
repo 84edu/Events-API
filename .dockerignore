@@ -1,0 +1,23 @@
+# Exclude virtual environments
+venv/
+.venv/
+env/
+
+# Ignore Python caches
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Local databases
+*.db
+*.sqlite3
+
+# Git metadata
+.git/
+.gitignore
+
+# Test caches and IDE-specific folders
+.pytest_cache/
+.vscode/
+.idea/

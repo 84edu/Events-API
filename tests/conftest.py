@@ -6,7 +6,7 @@ import time
 @pytest.fixture
 def base_url():
     """Provides the base URL for the API tests."""
-    return "http://localhost:5000"
+    return "http://localhost:5002"
 
 
 @pytest.fixture
