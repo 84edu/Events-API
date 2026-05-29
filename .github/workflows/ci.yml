@@ -11,10 +11,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Copy the code from the repo to the Ubuntu server.
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # A small test step to see if it works.
-      - name: Say hello
-        run: echo "Das Grundgerüst steht! Zeit für Docker..."
+      # 1. Set up Docker Buildx (helps with caching and building)
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 2. Build the Image
+      - name: Build Docker image
+        run: |
+          docker build -t events-api:latest .
+
+      # 3. Start Container
+      # We use `-d` for the background and map port 5000.
+      - name: Start container
+        run: |
+          docker run -d -p 5000:5000 --name active-events-api events-api:latest
+          # Important: Give the app time to boot up.
+          sleep 10
+
+      # 4. The Health Check
+      # We use curl to check if the API is responding.
+      - name: Check Health
+        run: |
+          curl --fail http://localhost:5000/api/events || exit 1
