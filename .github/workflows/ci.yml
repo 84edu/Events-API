@@ -55,3 +55,10 @@ jobs:
       - name: Run Tests
         run: |
           pytest -v
+
+      # 8. Clean Up Containers (Always Run!)
+      - name: Stop and remove container
+        if: always()  # This step runs even if previous steps fail.
+        run: |
+          docker stop active-events-api || true
+          docker rm active-events-api || true
